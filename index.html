@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ورشة التصميم: عدّل، شارك، واطبع فكرتك</title>
+<meta name="description" content="معرض تصميمات ومحرر داخل الموقع: اختر تصميمًا، عدّله، وانشر نسختك ليصوّت عليها الآخرون، أو اطلب طباعته.">
+<meta property="og:title" content="ورشة التصميم">
+<meta property="og:description" content="عدّل التصميمات وشارك نسختك واطلب الطباعة.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ctext y='.9em' font-size='9'%3E🖨️%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Tajawal:wght@400;700&family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+<style>
+:root{--bg:#F6F7F9;--sf:#fff;--ink:#14161C;--mut:#5A6070;--ln:#DDE0E7;--c:#0086A8;--m:#C81D6B;--y:#F2B705;--onm:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1117;--sf:#181B24;--ink:#EEF0F5;--mut:#A3AABB;--ln:#2B3040;--c:#33C3E3;--m:#FF5C9E;--y:#F7C948;--onm:#14161C;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1117;--sf:#181B24;--ink:#EEF0F5;--mut:#A3AABB;--ln:#2B3040;--c:#33C3E3;--m:#FF5C9E;--y:#F7C948;--onm:#14161C;color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.8 Cairo,"Segoe UI",Tahoma,system-ui,sans-serif;letter-spacing:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--sf);z-index:30}
+a{color:inherit}
+.skip{position:absolute;inset-inline-start:8px;top:-60px;background:var(--ink);color:var(--bg);padding:8px 14px;z-index:50}.skip:focus{top:8px}
+:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sf);border-block-end:1px solid var(--ln)}
+.w{max-width:1160px;margin-inline:auto;padding-inline:18px}
+.hd{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-block:8px}
+.logo{font-weight:800;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:8px;margin-inline-end:auto}
+.dots{display:inline-grid;grid-template-columns:1fr 1fr;gap:2px}.dots i{width:9px;height:9px;border-radius:50%}
+nav{display:flex;gap:4px;flex-wrap:wrap}nav a{padding:8px 12px;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;border-radius:8px;font-weight:600}nav a:hover{background:var(--bg)}
+.btn{font:inherit;font-weight:600;min-height:44px;padding:8px 18px;border-radius:10px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn.p{background:var(--ink);color:var(--bg)}.btn.m{background:var(--m);border-color:var(--m);color:var(--onm)}.btn.s{min-height:38px;padding:4px 12px;font-size:15px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.hero{padding-block:56px 40px;display:grid;gap:36px;grid-template-columns:1.1fr .9fr;align-items:center}
+h1{font-size:clamp(34px,6vw,64px);line-height:1.3;font-weight:800;margin:0 0 14px}
+h2{font-size:clamp(24px,3.4vw,34px);line-height:1.4;margin:0 0 14px;font-weight:800}
+.lead{color:var(--mut);max-width:34em;margin:0 0 22px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.art{justify-self:center;width:min(100%,340px)}
+.sec{padding-block:40px}
+ol.st{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+ol.st li{counter-increment:s;background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:18px}
+ol.st li::before{content:counter(s);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--y);color:#14161C;font-weight:800;margin-block-end:8px}
+ol.st b{display:block}
+.sv{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.sv div{border-inline-start:4px solid var(--c);padding:6px 14px;background:var(--sf)}.sv div:nth-child(3n+2){border-color:var(--m)}.sv div:nth-child(3n){border-color:var(--y)}
+.sv b{display:block}.sv span{color:var(--mut);font-size:15px}
+blockquote{margin:0;padding:18px;background:var(--sf);border:1px dashed var(--mut);border-radius:12px;color:var(--mut)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-block:10px 18px}
+select,input[type=search],input[type=text],input[type=number],textarea{font:inherit;min-height:44px;padding:6px 12px;border:1.5px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink)}
+input[type=color]{width:44px;height:44px;padding:2px;border:1.5px solid var(--ln);border-radius:10px;background:var(--sf)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card .th{aspect-ratio:3/4;background:var(--bg);display:block;width:100%;object-fit:cover}
+.card .bd{padding:12px 14px;display:grid;gap:4px;flex:1}.card h3{margin:0;font-size:18px}
+.meta{color:var(--mut);font-size:14px;display:flex;gap:12px;flex-wrap:wrap}
+.card .ac{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 14px}
+.note{padding:22px;border:1px dashed var(--mut);border-radius:12px;color:var(--mut);background:var(--sf)}
+.ed{display:grid;gap:12px;grid-template-columns:150px 1fr 220px;align-items:start;padding-block:14px}
+.tools,.props{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:10px;display:grid;gap:8px}
+.tools .btn,.props .btn{width:100%}
+.props label{display:grid;gap:4px;font-size:14px;color:var(--mut)}
+.stage{background:var(--bg);border:1px solid var(--ln);border-radius:14px;overflow:auto;max-height:78vh;padding:14px;text-align:center}
+.stage .canvas-container{margin:auto;box-shadow:0 2px 14px rgba(0,0,0,.18)}
+.edbar{display:flex;gap:8px;flex-wrap:wrap;padding-block:4px 30px}
+dialog{border:1px solid var(--ln);border-radius:16px;background:var(--sf);color:var(--ink);max-width:min(760px,94vw);width:100%;padding:20px}dialog::backdrop{background:rgba(0,0,0,.5)}
+.vl{display:grid;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.vl li{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;border:1px solid var(--ln);border-radius:12px;padding:8px}
+.vl img{width:70px;aspect-ratio:3/4;object-fit:cover;border-radius:6px}
+.best{background:var(--y);color:#14161C;border-radius:6px;padding:0 8px;font-size:13px;font-weight:700}
+#toast{position:fixed;inset-inline:0;bottom:calc(18px + env(safe-area-inset-bottom,0px));margin-inline:auto;width:fit-content;max-width:92vw;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}#toast.on{opacity:1}
+footer{border-block-start:1px solid var(--ln);padding-block:28px;color:var(--mut);background:var(--sf)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.ed{grid-template-columns:1fr}.tools{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}.vl li{grid-template-columns:56px 1fr}.vl li>:last-child{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header><div class="w hd">
+<a class="logo" href="#home"><span class="dots" aria-hidden="true"><i style="background:var(--c)"></i><i style="background:var(--m)"></i><i style="background:var(--y)"></i><i style="background:var(--ink)"></i></span>اسم المكتب</a>
+<nav aria-label="التنقل الرئيسي"><a href="#home">الرئيسية</a><a href="#gallery">معرض التصميمات</a><a href="#editor">ابدأ تصميمك</a></nav>
+<button class="btn s" id="theme" type="button" aria-label="تبديل الوضع الفاتح والداكن">الوضع الداكن</button>
+</div></header>
+<main id="main">
+
+<section id="home" aria-labelledby="h1"><div class="w">
+<div class="hero">
+<div>
+<h1 id="h1">فكرتك تستحق تصميمًا استثنائيًا</h1>
+<p class="lead">اختر تصميمًا من معرض المكتب، وعدّله داخل الموقع دون أي برنامج، ثم انشر نسختك ليصوّت عليها الآخرون. وإذا أعجبك الناتج نطبعه لك.</p>
+<div class="row"><a class="btn p" href="#gallery">استكشف التصميمات</a><a class="btn m" href="#editor">ابدأ تصميمك</a><a class="btn" id="wa1" href="https://wa.me/200000000000" rel="noopener">اطلب خدمة عبر واتساب</a></div>
+</div>
+<svg class="art" viewBox="0 0 300 380" role="img" aria-label="بطاقة تصميم عليها علامات القص وألوان الطباعة الأربعة">
+<g stroke="currentColor" stroke-width="1.2" fill="none"><path d="M0 20h22M20 0v22M300 20h-22M280 0v22M0 360h22M20 380v-22M300 360h-22M280 380v-22"/></g>
+<rect x="34" y="34" width="232" height="312" rx="4" fill="var(--sf)" stroke="var(--ln)"/>
+<circle cx="110" cy="130" r="46" fill="var(--c)" opacity=".9"/><circle cx="160" cy="130" r="46" fill="var(--m)" opacity=".85"/><circle cx="135" cy="168" r="46" fill="var(--y)" opacity=".85"/>
+<rect x="64" y="244" width="172" height="12" rx="3" fill="var(--ink)"/><rect x="94" y="268" width="112" height="8" rx="3" fill="var(--mut)"/><rect x="114" y="288" width="72" height="8" rx="3" fill="var(--ln)"/>
+</svg>
+</div></div>
+<div class="w sec"><h2>كيف تشارك في تطوير التصميمات؟</h2>
+<ol class="st"><li><b>اختر تصميمًا</b>تصفّح المعرض بحسب المناسبة.</li><li><b>اضغط «شارك بفكرتك»</b>تُفتح نسخة مستقلة، والأصل لا يتغيّر أبدًا.</li><li><b>عدّل واحفظ</b>النصوص والألوان والخطوط والصور والأشكال.</li><li><b>انشر نسختك</b>تظهر بجانب الأصل ويصوّت عليها الزوار.</li></ol></div>
+<div class="w sec"><h2>الخدمات</h2>
+<div class="sv">
+<div><b>كروت شخصية وهويات بصرية</b><span>تصميم وطباعة الكروت واللوجوهات.</span></div>
+<div><b>دعوات ومناسبات</b><span>أفراح وخطوبة وأعياد ميلاد ومواليد وتخرج.</span></div>
+<div><b>شهادات ودروع</b><span>تصميم شهادات التقدير وطباعتها.</span></div>
+<div><b>بوسترات وفلايرات وبنرات</b><span>مطبوعات ولافتات للمحال والفعاليات.</span></div>
+<div><b>منيوهات وأغلفة كتب</b><span>قوائم المطاعم والمذكرات والأغلفة.</span></div>
+<div><b>سوشيال ميديا وتصوير وطباعة</b><span>تصميمات المنصات والمستلزمات المكتبية.</span></div>
+</div><p class="lead" style="margin-top:14px">الأسعار تُحدَّد من المكتب بحسب الخامة والمقاس والكمية. اطلب عرض سعر وسنردّ عليك.</p></div>
+<div class="w sec"><h2>آراء العملاء</h2><blockquote>[أضف رأي عميل حقيقي هنا]</blockquote></div>
+</section>
+
+<section id="gallery" hidden aria-labelledby="gh"><div class="w sec">
+<h2 id="gh">معرض التصميمات</h2>
+<div class="bar">
+<input type="search" id="q" placeholder="ابحث باسم التصميم" aria-label="بحث">
+<select id="fc" aria-label="التصنيف"></select>
+<select id="fs" aria-label="الترتيب"><option value="new">الأحدث</option><option value="pop">الأكثر شعبية</option></select>
+<button class="btn s m" id="seed" type="button" hidden>إضافة تصميمات أولية</button>
+</div>
+<div id="gl" class="grid" aria-live="polite"></div>
+</div></section>
+
+<section id="editor" hidden aria-labelledby="eh"><div class="w">
+<h2 id="eh" style="margin-top:20px">محرر التصميمات <small id="ept" style="color:var(--mut);font-size:16px;font-weight:400"></small></h2>
+<div class="ed">
+<div class="tools" role="toolbar" aria-label="أدوات الإضافة">
+<button class="btn s" id="aT" type="button">إضافة نص</button><button class="btn s" id="aR" type="button">مستطيل</button><button class="btn s" id="aC" type="button">دائرة</button><button class="btn s" id="aG" type="button">مثلث</button>
+<button class="btn s" id="aI" type="button">رفع صورة</button><input type="file" id="fi" aria-label="اختر صورة" accept="image/png,image/jpeg,image/webp" hidden>
+<button class="btn s" id="dl" type="button">حذف العنصر</button>
+<button class="btn s" id="un" type="button">تراجع</button><button class="btn s" id="re" type="button">إعادة</button>
+</div>
+<div class="stage" id="stage"><canvas id="cv" width="600" height="800"></canvas></div>
+<div class="props">
+<label>الخط<select id="pf"><option>Cairo</option><option>Tajawal</option><option>Amiri</option><option>Reem Kufi</option></select></label>
+<label>الحجم<input type="number" id="ps" min="8" max="200" value="36"></label>
+<label>لون العنصر المحدد<input type="color" id="pc" value="#14161c"></label>
+<label>لون الخلفية<input type="color" id="pb" value="#ffffff"></label>
+<label>التكبير<input type="range" id="pz" min="40" max="150" value="100"></label>
+</div>
+</div>
+<div class="edbar">
+<button class="btn" id="sd" type="button">حفظ كمسودة</button><button class="btn" id="rd" type="button">استعادة المسودة</button>
+<button class="btn" id="pv" type="button">معاينة</button><button class="btn" id="xp" type="button">تصدير PNG</button><button class="btn" id="xj" type="button">تصدير JPG</button>
+<button class="btn m" id="pb2" type="button">انشر نسختك</button>
+</div>
+</div></section>
+</main>
+<footer><div class="w">اسم المكتب. للتواصل: <a href="mailto:hello@example.com" dir="ltr">hello@example.com</a> أو <a id="wa2" href="https://wa.me/200000000000" dir="ltr" rel="noopener">واتساب</a>.<br>بنشر نسخة تُقرّ بأن التصميم من إبداعك وأن للمكتب حق عرضه في المعرض. للمكتب حذف أي مشاركة مخالفة.</div></footer>
+
+<dialog id="dlg" aria-label="تفاصيل التصميم"></dialog>
+<dialog id="pub" aria-label="نشر النسخة"><form method="dialog" id="pf2"><h2>انشر نسختك</h2>
+<p><label>اسم النسخة<br><input type="text" id="vn" maxlength="60" required style="width:100%"></label></p>
+<p><label>وصف مختصر<br><textarea id="vd" maxlength="200" rows="3" style="width:100%"></textarea></label></p>
+<div class="row"><button class="btn m" id="go" type="submit" value="ok">نشر</button><button class="btn" value="x" type="submit" formnovalidate>إلغاء</button></div></form></dialog>
+<dialog id="prev" aria-label="معاينة"><div id="pvb"></div><form method="dialog"><button class="btn" style="margin-top:10px">إغلاق</button></form></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CATS=['أفراح وخطوبة','أعياد ميلاد','تخرج','مواليد وسبوع','مناسبات دينية','مناسبات وطنية','أعمال تجارية','تصميمات شخصية','سوشيال ميديا','طباعة ومطبوعات'];
+const WA='https://wa.me/200000000000?text='+encodeURIComponent('مرحبًا، أريد الاستفسار عن خدمة طباعة وتصميم.');
+$('#wa1').href=WA;$('#wa2').href=WA;
+const S={db:null,uid:null,owner:false,user:null,designs:[],variants:[],votes:{},mine:{},state:'load'};
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),3200)}
+/* theme */
+$('#theme').onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).colorScheme==='dark';r.dataset.theme=d?'light':'dark';$('#theme').textContent=d?'الوضع الداكن':'الوضع الفاتح'};
+/* data */
+async function boot(){
+ try{
+  if(typeof claude==='undefined')throw 0;
+  const [db,user]=await Promise.all([claude.use('db'),claude.use('user')]);
+  S.db=db;S.user=user;
+  if(user){S.uid=await user.id();S.owner=await user.isOwner()}
+ }catch(e){}
+ if(!S.db){S.state='off';renderG();return}
+ const tm=setTimeout(()=>{if(S.state==='load'){S.state='err';renderG()}},10000);
+ const done=()=>{S.state='ok';clearTimeout(tm);renderG();refreshDlg()};
+ const bad=()=>{S.state='err';renderG()};
+ S.db.collection('designs').onSnapshot(s=>{S.designs=s.docs.map(d=>({id:d.id,...d.data()}));done()},bad);
+ S.db.collection('variants').onSnapshot(s=>{S.variants=s.docs.flatMap(d=>Object.entries(d.data()?.items||{}).map(([id,v])=>({id,uid:d.id,...v})));done()},bad);
+ S.db.collection('votes').onSnapshot(s=>{S.votes={};S.mine={};s.docs.forEach(d=>{const v=d.data()?.v||{};for(const k in v)S.votes[k]=(S.votes[k]||0)+1;if(d.id===S.uid)S.mine=v});done()},bad);
+}
+const vc=id=>S.variants.filter(v=>v.parent===id);
+const score=d=>(S.votes[d.id]||0)+vc(d.id).length;
+/* gallery */
+$('#fc').innerHTML='<option value="">كل التصنيفات</option>'+CATS.map(c=>`<option>${c}</option>`).join('');
+['#q','#fc','#fs'].forEach(s=>$(s).addEventListener('input',renderG));
+function renderG(){
+ const g=$('#gl');$('#seed').hidden=!(S.owner&&S.state==='ok'&&!S.designs.length);
+ if(S.state==='load'){g.innerHTML='<p class="note">جارٍ تحميل التصميمات…</p>';return}
+ if(S.state==='off'){g.innerHTML='<p class="note">المعرض يحتاج إلى قاعدة البيانات وتسجيل الدخول. افتح الصفحة من داخل claude.ai.</p>';return}
+ if(S.state==='err'){g.innerHTML='<p class="note">تعذر تحميل التصميمات. أعد فتح الصفحة بعد قليل.</p>';return}
+ const q=$('#q').value.trim(),c=$('#fc').value;
+ let a=S.designs.filter(d=>(!c||d.cat===c)&&(!q||(d.title||'').includes(q)));
+ a.sort($('#fs').value==='pop'?(x,y)=>score(y)-score(x):(x,y)=>(y.at||0)-(x.at||0));
+ if(!a.length){g.innerHTML=`<p class="note">${S.designs.length?'لا توجد نتائج مطابقة.':(S.owner?'المعرض فارغ. اضغط «إضافة تصميمات أولية» أو أضف تصاميمك.':'لا توجد تصميمات بعد. عُد قريبًا.')}</p>`;return}
+ g.innerHTML=a.map(d=>`<article class="card"><img class="th" src="${esc(d.thumb)}" alt="${esc(d.title)}" loading="lazy"><div class="bd"><h3>${esc(d.title)}</h3><div class="meta"><span>${esc(d.cat)}</span><span>${vc(d.id).length} نسخة</span><span>${S.votes[d.id]||0} إعجاب</span></div></div><div class="ac"><button class="btn s" data-a="det" data-id="${d.id}">التفاصيل</button><button class="btn s m" data-a="idea" data-id="${d.id}">شارك بفكرتك</button><button class="btn s" data-a="like" data-id="${d.id}" aria-pressed="${!!S.mine[d.id]}">${S.mine[d.id]?'أعجبني ✓':'إعجاب'}</button><button class="btn s" data-a="shr" data-id="${d.id}">مشاركة</button></div></article>`).join('');
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-a]');if(!b)return;const id=b.dataset.id,d=S.designs.find(x=>x.id===id),a=b.dataset.a;
+ if(a==='det')openDlg(id);
+ if(a==='idea'&&d){$('#dlg').close();openEd(d)}
+ if(a==='like')vote(id,'orig');
+ if(a==='vv')vote(id,'var');
+ if(a==='shr')share(d?.title);
+ if(a==='rm')removeItem(id,b.dataset.uid,b.dataset.k);
+});
+async function vote(id,k){
+ if(!S.db||!S.uid)return toast('سجّل الدخول من claude.ai للتصويت.');
+ const item=k==='var'?S.variants.find(v=>v.id===id):null;
+ if(item&&item.uid===S.uid)return toast('لا يمكنك التصويت لنسختك.');
+ const v={...S.mine};v[id]?delete v[id]:v[id]=1;
+ try{await S.db.doc('votes/'+S.uid).set({v})}catch(e){toast('تعذر حفظ التصويت. قد يكون حسابك للقراءة فقط.')}
+}
+async function share(t){const u=location.href.split('#')[0]+'#gallery';try{if(navigator.share)await navigator.share({title:t||'تصميم',url:u});else{await navigator.clipboard.writeText(u);toast('تم نسخ الرابط')}}catch(e){}}
+/* details dialog */
+let curDlg=null;
+function openDlg(id){curDlg=id;refreshDlg();$('#dlg').showModal()}
+async function refreshDlg(){
+ const d=S.designs.find(x=>x.id===curDlg);if(!d||!$('#dlg').open&&$('#dlg').innerHTML&&false)return;
+ if(!d||!curDlg)return;
+ const vs=vc(d.id).sort((a,b)=>(S.votes[b.id]||0)-(S.votes[a.id]||0));
+ let names={};try{if(S.user&&vs.length)names=await S.user.profiles([...new Set(vs.map(v=>v.uid))])}catch(e){}
+ const top=vs.length&&(S.votes[vs[0].id]||0)>0?vs[0].id:null;
+ $('#dlg').innerHTML=`<h2>${esc(d.title)}</h2><div class="row" style="align-items:flex-start"><img src="${esc(d.thumb)}" alt="التصميم الأصلي: ${esc(d.title)}" style="width:170px;border-radius:10px"><div><p class="meta"><span>${esc(d.cat)}</span><span>${S.votes[d.id]||0} إعجاب</span></p><p>هذا هو التصميم الأصلي. النسخ المشتقة منه تظهر أدناه ولا تغيّره.</p><div class="row"><button class="btn m s" data-a="idea" data-id="${d.id}">شارك بفكرتك</button>${S.owner?`<button class="btn s" data-a="rm" data-id="${d.id}" data-k="o">حذف الأصل</button>`:''}</div></div></div>
+ <h3>النسخ (${vs.length})</h3>${vs.length?`<ul class="vl">${vs.map(v=>`<li><img src="${esc(v.thumb)}" alt="${esc(v.title)}"><div><b>${esc(v.title)}</b> ${v.id===top?'<span class="best">الأفضل تقييمًا</span>':''}<div class="meta"><span>${esc(names[v.uid]?.name||'عضو')}</span><span>${new Date(v.at||0).toLocaleDateString('ar-EG')}</span><span>${S.votes[v.id]||0} صوت</span></div><div>${esc(v.desc)}</div></div><div class="row"><button class="btn s" data-a="vv" data-id="${v.id}">${S.mine[v.id]?'سحب صوتي':'صوّت'}</button>${S.owner?`<button class="btn s" data-a="rm" data-id="${v.id}" data-uid="${v.uid}" data-k="v">حذف</button>`:''}</div></li>`).join('')}</ul>`:'<p class="note">لا توجد نسخ بعد. كن أول من يشارك.</p>'}
+ <form method="dialog"><button class="btn" style="margin-top:12px">إغلاق</button></form>`;
+}
+async function removeItem(id,uid,k){
+ if(!S.owner||!confirm('تأكيد الحذف؟'))return;
+ try{
+  if(k==='o'){await S.db.doc('designs/'+id).delete();$('#dlg').close()}
+  else{const items={};S.variants.filter(v=>v.uid===uid&&v.id!==id).forEach(v=>{const{id:_,uid:__,...r}=v;items[v.id]=r});await S.db.doc('variants/'+uid).set({items})}
+  toast('تم الحذف')
+ }catch(e){toast('تعذر الحذف')}
+}
+/* seed (owner) */
+const TP=[
+{t:'دعوة زفاف',c:CATS[0],bg:'#FBF3F5',o:[['r',28,28,544,744,'',"#B08A3E"],['t','بسم الله الرحمن الرحيم',70,26,'#7A5C1E','Amiri'],['t','بدعوتكم لحضور زفاف',200,30,'#3A2F2F','Amiri'],['t','أحمد وسارة',280,76,'#8A1F4B','Amiri',700],['t','الجمعة 13 نوفمبر 2026',430,32,'#3A2F2F','Cairo'],['t','قاعة الاحتفالات، الساعة 8 مساءً',500,26,'#5A6070','Cairo']]},
+{t:'عيد ميلاد سعيد',c:CATS[1],bg:'#FFD84D',o:[['c',90,110,70,'#C81D6B'],['c',510,690,90,'#0086A8'],['c',480,150,40,'#fff'],['t','عيد ميلاد سعيد',260,70,'#14161C','Reem Kufi',700],['t','ليلى تكمل 7 سنوات',420,34,'#14161C','Cairo',600],['t','السبت 4 مساءً في الحديقة',560,26,'#14161C','Cairo']]},
+{t:'شهادة تقدير',c:CATS[2],bg:'#14213D',o:[['r',24,24,552,752,'','#F2B705'],['t','شهادة تقدير',110,64,'#F2B705','Amiri',700],['t','تُمنح هذه الشهادة إلى',250,28,'#EEF0F5','Cairo'],['t','اسم المتفوق',330,54,'#fff','Amiri',700],['t','تقديرًا لجهوده وتفوقه خلال العام الدراسي',460,26,'#EEF0F5','Cairo']]},
+{t:'إعلان افتتاح',c:CATS[6],bg:'#0086A8',o:[['r',40,40,520,720,'#fff'],['c',300,230,110,'#F2B705'],['t','افتتاح قريبًا',400,60,'#14161C','Cairo',800],['t','اسم المشروع هنا',500,34,'#C81D6B','Cairo',700],['t','عروض الافتتاح لأول أسبوع',590,26,'#5A6070','Cairo']]}];
+async function mk(p){
+ const c=new fabric.StaticCanvas(null,{width:600,height:800,backgroundColor:p.bg});
+ p.o.forEach(([k,...a])=>{
+  if(k==='r')c.add(new fabric.Rect({left:a[0],top:a[1],width:a[2],height:a[3],fill:a[4]||'rgba(0,0,0,0)',stroke:a[5]||null,strokeWidth:a[5]?3:0}));
+  if(k==='c')c.add(new fabric.Circle({left:a[0]-a[2],top:a[1]-a[2],radius:a[2],fill:a[3]}));
+  if(k==='t')c.add(new fabric.Textbox(a[0],{left:40,top:a[1],width:520,textAlign:'center',direction:'rtl',fontSize:a[2],fill:a[3],fontFamily:a[4],fontWeight:a[5]||400}));
+ });
+ c.renderAll();return{title:p.t,cat:p.c,json:JSON.stringify(c),thumb:c.toDataURL({format:'jpeg',quality:.6,multiplier:.35}),at:Date.now()};
+}
+$('#seed').onclick=async()=>{
+ $('#seed').disabled=true;
+ try{await Promise.all(['Amiri','Cairo','Reem Kufi'].map(f=>document.fonts.load('700 30px "'+f+'"','بسم')));
+  for(const p of TP)await S.db.collection('designs').add(await mk(p));toast('تمت إضافة التصميمات')}
+ catch(e){toast('تعذرت الإضافة')}$('#seed').disabled=false;
+};
+/* editor */
+let cv,hist=[],hi=-1,lock=false,Z=1,E={parent:null},pend=null;
+const FONTS=['Cairo','Tajawal','Amiri','Reem Kufi'];
+function initEd(){
+ if(!cv){
+  cv=new fabric.Canvas('cv',{preserveObjectStacking:true,backgroundColor:'#ffffff'});
+  ['object:added','object:modified','object:removed'].forEach(n=>cv.on(n,push));
+  ['selection:created','selection:updated'].forEach(n=>cv.on(n,sync));
+  Promise.all(FONTS.map(f=>document.fonts.load('400 20px "'+f+'"','نص'))).then(()=>cv.requestRenderAll());
+  push();
+ }
+ if(pend){const p=pend;pend=null;E.parent=p.parent;load(p.json,p.bg)}
+ $('#ept').textContent=E.parent?'(نسخة مستقلة من: '+E.parent.title+')':'(لوحة بيضاء)';
+}
+function push(){if(lock)return;hist=hist.slice(0,hi+1);hist.push(JSON.stringify(cv));hist=hist.slice(-40);hi=hist.length-1}
+function load(j){lock=true;cv.loadFromJSON(j,()=>{cv.renderAll();lock=false;hist=[JSON.stringify(cv)];hi=0;$('#pb').value=toHex(cv.backgroundColor)})}
+function restore(){lock=true;cv.loadFromJSON(hist[hi],()=>{cv.renderAll();lock=false})}
+const toHex=c=>/^#[0-9a-f]{6}$/i.test(c)?c:'#ffffff';
+function openEd(d){pend={parent:{id:d.id,title:d.title},json:d.json};if(location.hash==='#editor'){initEd()}else location.hash='editor'}
+function sync(){const o=cv.getActiveObject();if(!o)return;if(o.fontFamily)$('#pf').value=o.fontFamily;if(o.fontSize)$('#ps').value=Math.round(o.fontSize);if(typeof o.fill==='string')$('#pc').value=toHex(o.fill)}
+const add=o=>{cv.add(o);cv.setActiveObject(o);cv.requestRenderAll()};
+$('#aT').onclick=()=>add(new fabric.Textbox('نص جديد',{left:150,top:150,width:300,fontFamily:'Cairo',fontSize:36,fill:'#14161c',direction:'rtl',textAlign:'right'}));
+$('#aR').onclick=()=>add(new fabric.Rect({left:100,top:200,width:200,height:120,fill:'#0086A8'}));
+$('#aC').onclick=()=>add(new fabric.Circle({left:200,top:300,radius:70,fill:'#C81D6B'}));
+$('#aG').onclick=()=>add(new fabric.Triangle({left:250,top:250,width:140,height:120,fill:'#F2B705'}));
+$('#dl').onclick=()=>{cv.getActiveObjects().forEach(o=>cv.remove(o));cv.discardActiveObject();cv.requestRenderAll()};
+$('#un').onclick=()=>{if(hi>0){hi--;restore()}};$('#re').onclick=()=>{if(hi<hist.length-1){hi++;restore()}};
+$('#aI').onclick=()=>$('#fi').click();
+$('#fi').onchange=e=>{
+ const f=e.target.files[0];e.target.value='';if(!f)return;
+ if(!/^image\/(png|jpeg|webp)$/.test(f.type)||f.size>4e6)return toast('ارفع صورة PNG أو JPG أو WebP لا تتجاوز 4 ميغابايت.');
+ const im=new Image();im.onload=()=>{const k=Math.min(1,600/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+  fabric.Image.fromURL(c.toDataURL(f.type==='image/png'?'image/png':'image/jpeg',.72),o=>{o.scaleToWidth(280);o.set({left:160,top:200});add(o)});URL.revokeObjectURL(im.src)};
+ im.onerror=()=>toast('تعذر قراءة الصورة.');im.src=URL.createObjectURL(f);
+};
+const setP=(k,v)=>{const o=cv.getActiveObject();if(!o)return toast('حدّد عنصرًا أولًا.');o.set(k,v);cv.requestRenderAll();cv.fire('object:modified')};
+$('#pf').onchange=e=>setP('fontFamily',e.target.value);
+$('#ps').onchange=e=>setP('fontSize',Math.max(8,Math.min(200,+e.target.value||36)));
+$('#pc').onchange=e=>setP('fill',e.target.value);
+$('#pb').onchange=e=>{cv.setBackgroundColor(e.target.value,()=>{cv.renderAll();push()})};
+function setZ(z){Z=z;cv.setZoom(z);cv.setDimensions({width:600*z,height:800*z})}
+$('#pz').oninput=e=>setZ(e.target.value/100);
+const flat=fn=>{const z=Z;cv.discardActiveObject();setZ(1);const r=fn();setZ(z);return r};
+const dataBlob=u=>{const [h,b]=u.split(','),m=h.match(/:(.*?);/)[1],s=atob(b),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return new Blob([a],{type:m})};
+async function exp(f){
+ const u=flat(()=>cv.toDataURL({format:f==='jpg'?'jpeg':'png',quality:.92,multiplier:2}));
+ try{const d=await claude.use('downloads');if(!d)return toast('التنزيل غير متاح هنا. استخدم المعاينة وانسخ الصورة.');await d.save({filename:'design.'+f,data:dataBlob(u)})}
+ catch(e){if(e?.code!=='declined')toast('تعذر حفظ الملف.')}
+}
+$('#xp').onclick=()=>exp('png');$('#xj').onclick=()=>exp('jpg');
+$('#pv').onclick=()=>{const u=flat(()=>cv.toDataURL({format:'png',multiplier:1}));$('#pvb').innerHTML=`<img src="${u}" alt="معاينة التصميم" style="max-width:100%;max-height:70vh;display:block;margin:auto">`;$('#prev').showModal()};
+$('#sd').onclick=()=>{try{localStorage.setItem('draft',JSON.stringify({p:E.parent,j:JSON.stringify(cv)}));toast('تم حفظ المسودة على هذا الجهاز.')}catch(e){toast('تعذر حفظ المسودة.')}};
+$('#rd').onclick=()=>{try{const d=JSON.parse(localStorage.getItem('draft')||'null');if(!d)return toast('لا توجد مسودة محفوظة.');E.parent=d.p;load(d.j);$('#ept').textContent=d.p?'(نسخة مستقلة من: '+d.p.title+')':'(لوحة بيضاء)'}catch(e){toast('تعذر قراءة المسودة.')}};
+$('#pb2').onclick=()=>{
+ if(!S.db||!S.uid)return toast('النشر يحتاج تسجيل الدخول من claude.ai.');
+ if(!E.parent)return toast('لنشر نسخة، افتح تصميمًا من المعرض واضغط «شارك بفكرتك».');
+ $('#vn').value='';$('#vd').value='';$('#pub').showModal();
+};
+$('#pf2').onsubmit=async e=>{
+ if(e.submitter?.value!=='ok')return;
+ const name=$('#vn').value.trim();if(!name)return;
+ const item={parent:E.parent.id,title:name,desc:$('#vd').value.trim(),json:JSON.stringify(flat(()=>cv)),thumb:flat(()=>cv.toDataURL({format:'jpeg',quality:.6,multiplier:.35})),at:Date.now()};
+ const items={};S.variants.filter(v=>v.uid===S.uid).forEach(v=>{const{id,uid,...r}=v;items[id]=r});
+ const vid='v'+Date.now().toString(36);items[vid]=item;
+ if(JSON.stringify(items).length>230000){toast('حجم أعمالك كبير. قلّل الصور أو احذف نسخة قديمة.');return}
+ try{await S.db.doc('variants/'+S.uid).set({items});toast('تم نشر نسختك بجانب الأصل.')}catch(x){toast('تعذر النشر. قد يكون حسابك للقراءة فقط.')}
+};
+/* routing */
+function route(){
+ const h=(location.hash||'#home').slice(1),v=['home','gallery','editor'].includes(h)?h:'home';
+ document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!==v);
+ if(v==='editor')initEd();if(v==='gallery')renderG();window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);route();boot();
+</script>
+</body>
+</html>
